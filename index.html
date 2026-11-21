@@ -1,1 +1,79 @@
 
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA AI</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b0d12;color:#f5f7ff;font-family:Arial,sans-serif;height:100vh;display:flex}
+.sidebar{width:250px;background:#10131b;padding:22px;border-right:1px solid #242938}
+.logo{font-size:27px;font-weight:800;color:#55aaff;margin-bottom:35px}
+.new{width:100%;padding:13px;background:#202635;color:white;border:1px solid #30394c;border-radius:10px;cursor:pointer}
+.sidebar p{color:#778198;font-size:13px;margin-top:30px}
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:25px;min-width:0}
+header{width:100%;font-size:17px;color:#aab4c8}
+.welcome{margin:auto;text-align:center}
+.welcome h1{font-size:42px;margin-bottom:12px}
+.welcome h1 span{color:#55aaff}
+.welcome p{color:#929db1}
+.chat{width:min(750px,100%);margin-top:auto}
+.messages{max-height:65vh;overflow-y:auto;margin-bottom:15px}
+.message{padding:14px 17px;margin:10px 0;border-radius:13px;line-height:1.5;white-space:pre-wrap}
+.user{background:#1c2d49;margin-left:auto;max-width:85%}
+.ai{background:#171c27;max-width:90%}
+.input-area{display:flex;gap:10px;background:#171c27;border:1px solid #30394c;border-radius:15px;padding:10px}
+input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:white;font-size:16px;padding:10px}
+.send{background:#3989ed;color:white;border:0;border-radius:10px;padding:0 20px;font-size:16px;cursor:pointer}
+footer{color:#68748a;font-size:11px;text-align:center;margin-top:12px}
+@media(max-width:650px){.sidebar{display:none}main{padding:18px}.welcome h1{font-size:32px}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="logo">✦ NEXORA</div>
+<button class="new" onclick="newChat()">＋ Yeni sohbet</button>
+<p>Yapay zekânın yeni adresi.</p>
+</aside>
+<main>
+<header>NEXORA AI <span style="color:#55aaff">●</span></header>
+<section class="welcome" id="welcome">
+<h1>Merhaba, <span>ben NEXORA.</span></h1>
+<p>Bugün sana nasıl yardımcı olabilirim?</p>
+</section>
+<section class="chat">
+<div class="messages" id="messages"></div>
+<div class="input-area">
+<input id="question" placeholder="NEXORA'ya bir şey sor..." onkeydown="if(event.key==='Enter')sendMessage()">
+<button class="send" onclick="sendMessage()">➤</button>
+</div>
+<footer>NEXORA bazen hata yapabilir. Yanıtlarını kontrol et.</footer>
+</section>
+</main>
+<script>
+function sendMessage(){
+const input=document.getElementById("question");
+const text=input.value.trim();
+if(!text)return;
+document.getElementById("welcome").style.display="none";
+const messages=document.getElementById("messages");
+const user=document.createElement("div");
+user.className="message user";
+user.textContent=text;
+messages.appendChild(user);
+const answer=document.createElement("div");
+answer.className="message ai";
+answer.textContent="Merhaba! Ben NEXORA. Gerçek yapay zekâ bağlantım henüz kurulmadı. Çok yakında seninle daha akıllı sohbet edeceğim!";
+messages.appendChild(answer);
+input.value="";
+messages.scrollTop=messages.scrollHeight;
+}
+function newChat(){
+document.getElementById("messages").innerHTML="";
+document.getElementById("welcome").style.display="block";
+}
+</script>
+</body>
+</html>
+
